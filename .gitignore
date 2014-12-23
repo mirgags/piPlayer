@@ -1,0 +1,6 @@
+*.txt
+*.swp
+*.csv
+*.log
+*.sh
+nohup.out

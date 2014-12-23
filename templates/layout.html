@@ -1,0 +1,37 @@
+$def with (content)
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>In Future Movies Watch YOU</title>
+</head>
+<body>
+<h1>
+<form>
+  <input id="FullListButton" type="button" value='Full List'>
+</form>
+<!--    <a id="link2" href="http://192.168.1.51:8001/search">Search</a>-->
+</h1>
+<form action="/search" method="POST">
+    Type keywords to search <input type="text" id='keyword' name="keyword">
+    <br/></br>
+    <input type="submit">
+</form>
+
+<p></p>
+<div id="content">
+    $:content
+</div>
+
+<script>
+  document.getElementById("FullListButton").addEventListener('click',          function () { window.location.href = 'http://192.168.1.51:8001/'}, false);
+/*    document.getElementById("SearchButton").onclick = function () {                      window.location = "http://192.168.1.51:8001/search"};*/
+
+</script>
+
+</body>
+
+<footer>
+</footer>
+<script src='http://code.jquery.com/jquery-1.11.0.min.js'></script>
+</html>
