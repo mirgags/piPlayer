@@ -1,7 +1,56 @@
+$def with (i)
 <h1>Controls</h1>
 
+<h1>Playing</h1>
+
+<p>$:i</p>
+
 <div>
-  <div>
+  <div style='float:left'>
+    <form action='http://192.168.1.51:8001/stop' style='float:left; margin:10px'>
+      <input type="submit" value='Stop'>
+    </form>
+    <form action='http://192.168.1.51:8001/volup' style='float:left; margin:10px' method='post'>
+      <input type="hidden" name="media" value=$:i>
+      <input type="submit" value='Volume +'>
+    </form>
+    <form action='http://192.168.1.51:8001/seek30' style='float:left; margin:10px' method='post'>
+      <input type="hidden" name="media" value=$:i>
+      <input type="submit" value='Seek 30s +'>
+    </form>
+    <form action='http://192.168.1.51:8001/seek600' style='float:left; margin:10px' method='post'>
+      <input type="hidden" name="media" value=$:i>
+      <input type="submit" value='Seek 10m +'>
+    </form>
+  </div>
+  <div style='float:left; clear:left'>
+    <form action='http://192.168.1.51:8001/pause' style='float:left; margin:10px' method='post'>
+      <input type="hidden" name="media" value=$:i>
+      <input type="submit" value='Pause/Play'>
+    </form>
+    <form action='http://192.168.1.51:8001/voldown' style='float:left; margin:10px' method='post'>
+      <input type="hidden" name="media" value=$:i>
+      <input type="submit" value='Volume -'>
+    </form>
+    <form action='http://192.168.1.51:8001/back30' style='float:left; margin:10px' method='post'>
+      <input type="hidden" name="media" value=$:i>
+      <input type="submit" value='Seek 30s -'>
+    </form>
+    <form action='http://192.168.1.51:8001/back600' style='float:left; margin:10px' method='post'>
+      <input type="hidden" name="media" value=$:i>
+      <input type="submit" value='Seek 10m -'>
+    </form>
+  </div>
+  <div style='float:left; clear:left'>
+    <form action='http://192.168.1.51:8001/togglesubs' style='float:left; margin:10px' method='post'>
+      <input type="hidden" name="media" value=$:i>
+      <input type='Submit' value='Toggle Subtitles'>
+    </form>
+  </div>
+</div>
+<!--
+<div>
+  </div>
     <a href='http://192.168.1.51:8001/stop'>Stop</a>
     <a href='http://192.168.1.51:8001/volup'>Volume +</a>
     <a href='http://192.168.1.51:8001/seek30'>Seek +</a>
@@ -15,3 +64,4 @@
   </div>
 </div>
 <a href='http://192.168.1.51:8001/togglesubs'>Toggle Subtitles</a>
+-->

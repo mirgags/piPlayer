@@ -3,21 +3,44 @@ $def with (content)
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+    #content {
+    display: table;
+    }
+
+    #row  {
+    display: table-row;
+    }
+
+    .headerButton {
+      float: left;
+    }
+    </style>
     <title>In Future Movies Watch YOU</title>
 </head>
 <body>
-<h1>
+<div id='row'>
 <form>
-  <input id="FullListButton" type="button" value='Full List'>
+  <input id="FullListButton" type="button" value='Full List' class='headerButton'>
+</form>
+<form>
+  <input id="ControlsButton" type="button" value='Controls' class='headerButton'>
+</form>
+<form>
+  <input id="PlaylistButton" type="button" value='Play Playlist' class='headerButton'>
+</form>
+<form>
+  <input id="ClearPlaylistButton" type="button" value='Clear Playlist' class='headerButton'>
 </form>
 <!--    <a id="link2" href="http://192.168.1.51:8001/search">Search</a>-->
-</h1>
+</div>
+<div div id='row'>
 <form action="/search" method="POST">
     Type keywords to search <input type="text" id='keyword' name="keyword">
     <br/></br>
     <input type="submit">
 </form>
-
+</div>
 <p></p>
 <div id="content">
     $:content
@@ -25,6 +48,9 @@ $def with (content)
 
 <script>
   document.getElementById("FullListButton").addEventListener('click',          function () { window.location.href = 'http://192.168.1.51:8001/'}, false);
+  document.getElementById("ControlsButton").addEventListener('click',          function () { window.location.href = 'http://192.168.1.51:8001/controls'}, false);
+  document.getElementById("PlaylistButton").addEventListener('click',          function () { window.location.href = 'http://192.168.1.51:8001/playplaylist'}, false);
+  document.getElementById("ClearPlaylistButton").addEventListener('click',          function () { window.location.href = 'http://192.168.1.51:8001/clearplaylist'}, false);
 /*    document.getElementById("SearchButton").onclick = function () {                      window.location = "http://192.168.1.51:8001/search"};*/
 
 </script>
