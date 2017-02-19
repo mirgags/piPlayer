@@ -49,16 +49,17 @@ data = ''
 with open('%s/config.txt' % curPath, 'rb') as f:
     data += f.read()
 data = json.loads(data.replace('\n', ''))
-print data
-print json.dumps(data)
-print 'port: ' + data['port']
+#print data
+#print json.dumps(data)
+#print 'port: ' + data['port']
 for thing in data:
     print thing + ': ' + data[thing]
 f.close()
 
 class index:
     def GET(self):
-        exclude = ['.url', '.sfv', '.nfo', '.idx', '.sub', '.jpg', '.nzb', '.srt', '.srr', '.srs', '.zip', 'rar', 'sample', '.txt']
+        #exclude = ['.url', '.sfv', '.nfo', '.idx', '.sub', '.jpg', '.nzb', '.srt', '.srr', '.srs', '.zip', 'rar', 'sample', '.txt']
+        exclude = ['.url', '.idx']
         path = "/mnt/external"
         input = web.input(wordList=None)
         if not input['wordList'] is None:
@@ -79,7 +80,7 @@ class index:
                     show = False
                 if show:
                     wholePath = "%s/" % (os.path.join(root)) + file
-                    print wholePath
+                    #print wholePath
                     wholePath = wholePath.replace(" ", "+")
                     wholePostPath = wholePath.replace("'", "\'")
                     #greeting = greeting + "<p>" + "<a href=/play?name=%s>%s</a>" % (wholePath, wholePath) + "</p>"
@@ -88,7 +89,8 @@ class index:
 
 class addplaylist:
     def POST(self):
-        form = web.input(media = 'None')
+        #form = web.input(media = 'None')
+        form = web.input()
         i = form.media
         i = i.replace("+", "\ ")
         i = i.replace("\'", "\\'")       
@@ -115,25 +117,21 @@ class clearplaylist:
 
 class play:
     def POST(self):
-        form = web.input(media = 'None')
+        form = web.input()
         i = form.media
-        i = i.replace("+", " ")
-        i = i.replace("\'", "\'")
-        #print 'playing: ' + i
+        print 'playing: ' + i
         if ('.mp3' in i) or ('.flac' in i) or ('.m3u' in i):
             subprocess.Popen("killall vlc.bin", shell=True)
-            subprocess.Popen("vlc %s -I http --http-port 9000" % i, shell=True)
-            time.sleep(5)
-            with open('%s/playlist.m3u' % curPath, 'wb') as f:
-                f.write('')
-            f.close()
-            time.sleep(2)
+            subprocess.Popen("cvlc -I http --http-password yo --http-port 9200 %s" % i, shell=True)
+            time.sleep(10)
             return render.controlsAudio(i = i)
         else:
+            i = i.replace("+", " ")
+            i = i.replace("\'", "\'")
             subprocess.Popen("killall omxplayer.bin", stdout=subprocess.PIPE, shell=True)
             subprocess.Popen("clear", stdout=subprocess.PIPE, shell=True)
-            subprocess.Popen("omxplayer -o hdmi \"%s\" < ~/rebigulator/PythonApp/player" % i, shell=True)
-            subprocess.Popen("echo -n . > ~/rebigulator/PythonApp/player", shell=True)
+            subprocess.Popen("omxplayer -o hdmi \"%s\" > ~/rebigulator/PythonApp/player" % i, shell=True)
+            subprocess.Popen("echo -n . < ~/rebigulator/PythonApp/player", shell=True)
             return render.controls(i = i)
 
 class controls:
@@ -246,7 +244,7 @@ class volupAudio:
     def POST(self):
         form = web.input(media = 'None')
         i = form.media
-        print 'formdata: ' + i
+        #print 'formdata: ' + i
         subprocess.Popen('echo -n "+" > ~/rebigulator/PythonApp/player', shell=True)
         return render.controlsAudio(i = i)
 
